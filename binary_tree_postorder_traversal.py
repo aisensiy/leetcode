@@ -11,39 +11,34 @@ class Solution:
     def postorderTraversal(self, root):
         if root == None: return []
 
-        stack = [root]
-        prev = None
+        travel = []
+        visit = []
         result = []
 
-        while len(stack) > 0:
-            curr = stack[-1]
-            if not prev or prev.left == curr or prev.right == curr:
-                if curr.left:
-                    stack.append(curr.left)
-                elif curr.right:
-                    stack.append(curr.right)
-                else:
-                    result.append(curr.val)
-                    stack.pop()
-            elif curr.left == prev:
-                if curr.right:
-                    stack.append(curr.right)
-                else:
-                    result.append(curr.val)
-                    stack.pop()
-            elif curr.right == prev:
-                result.append(curr.val)
-                stack.pop()
+        travel.append(root)
 
-            prev = curr
+        while len(travel) > 0:
+            node = travel.pop()
+
+            visit.append(node)
+            if node.left:
+                travel.append(node.left)
+            if node.right:
+                travel.append(node.right)
+
+        while len(visit) > 0:
+            node = visit.pop()
+            result.append(node.val)
 
         return result
 
 
-
 if __name__ == '__main__':
-    node = TreeNode(3)
-    node.left = TreeNode(1)
-    node.right = TreeNode(2)
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(4)
+    root.right = TreeNode(5)
+    root.right.right = TreeNode(6)
 
-    print Solution().postorderTraversal(node)
+    print Solution().postorderTraversal(root)
