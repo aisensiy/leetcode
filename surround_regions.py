@@ -7,7 +7,7 @@ class Solution:
         loop the bounds of the graph and mark all O can be travelled
         as +
         and at last set all left O as X and set + as O
-        """"
+        """
         if len(board) == 0: return board
 
         m = len(board)
@@ -44,7 +44,7 @@ class Solution:
     def _dp(self, board, i, j, handler):
         """
         Use recursive will cause runtime error
-        """"
+        """
         m = len(board)
         n = len(board[0])
 
